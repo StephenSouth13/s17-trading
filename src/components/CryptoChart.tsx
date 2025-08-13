@@ -7,14 +7,30 @@ let TradingViewWidget: any = null;
 const CryptoChart = memo(() => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [widgetLoaded, setWidgetLoaded] = useState(false);
 
   useEffect(() => {
-    // Set loading false after a short delay để show chart
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
+    // Dynamically import the TradingView widget
+    const loadWidget = async () => {
+      try {
+        const module = await import('react-tradingview-widget');
+        TradingViewWidget = module.default || module;
+        setWidgetLoaded(true);
 
-    return () => clearTimeout(timer);
+        // Set loading false after widget is loaded
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
+
+        return () => clearTimeout(timer);
+      } catch (err) {
+        console.error('Failed to load TradingView widget:', err);
+        setError(true);
+        setIsLoading(false);
+      }
+    };
+
+    loadWidget();
   }, []);
 
   if (isLoading) {
