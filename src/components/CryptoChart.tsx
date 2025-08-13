@@ -61,29 +61,20 @@ const CryptoChart = memo(() => {
         <h2 className="text-lg sm:text-xl font-semibold">Bitcoin Price</h2>
       </div>
       <div className="h-[250px] sm:h-[350px] lg:h-[400px] w-full">
-        {widgetLoaded && TradingViewWidget ? (
-          <TradingViewWidget
-            symbol="BINANCE:BTCUSDT"
-            theme="Dark"
-            locale="en"
-            autosize={true}
-            hide_side_toolbar={false}
-            allow_symbol_change={true}
-            interval="D"
-            toolbar_bg="#141413"
-            enable_publishing={false}
-            hide_top_toolbar={false}
-            save_image={false}
-            container_id="tradingview_chart_btc"
-          />
-        ) : (
-          <div className="w-full h-full bg-muted/20 rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <RefreshCw className="h-8 w-8 mx-auto mb-2 animate-spin text-primary" />
-              <p className="text-sm text-muted-foreground">Loading TradingView chart...</p>
-            </div>
-          </div>
-        )}
+        <TradingViewWidget
+          symbol="BINANCE:BTCUSDT"
+          theme="Dark"
+          locale="en"
+          autosize={true}
+          hide_side_toolbar={false}
+          allow_symbol_change={true}
+          interval="D"
+          toolbar_bg="#141413"
+          enable_publishing={false}
+          hide_top_toolbar={false}
+          save_image={false}
+          container_id="tradingview_chart_btc"
+        />
       </div>
     </div>
   );
