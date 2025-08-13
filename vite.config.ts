@@ -63,9 +63,7 @@ export default defineConfig({
       '@tanstack/react-query',
       'zustand',
       'lucide-react',
-    ],
-    exclude: [
-      'react-tradingview-widget' // Exclude heavy widgets from pre-bundling
+      'react-tradingview-widget' // Include to force CommonJS handling
     ]
   },
   // ESBuild optimizations
