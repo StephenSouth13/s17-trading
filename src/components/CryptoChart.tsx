@@ -1,6 +1,11 @@
 import { memo, useState, useEffect } from 'react';
-import TradingViewWidget from 'react-tradingview-widget';
 import { RefreshCw } from 'lucide-react';
+
+// Import with both default and named export handling
+import TradingViewWidget, * as TradingViewModule from 'react-tradingview-widget';
+
+// Ensure we get the correct export
+const Widget = TradingViewWidget || (TradingViewModule as any).default || TradingViewModule;
 
 const CryptoChart = memo(() => {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,7 +64,7 @@ const CryptoChart = memo(() => {
         <h2 className="text-lg sm:text-xl font-semibold">Bitcoin Price</h2>
       </div>
       <div className="h-[250px] sm:h-[350px] lg:h-[400px] w-full">
-        <TradingViewWidget
+        <Widget
           symbol="BINANCE:BTCUSDT"
           theme="Dark"
           locale="en"
