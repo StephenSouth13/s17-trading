@@ -1,6 +1,8 @@
 import { memo, useState, useEffect } from 'react';
-import TradingViewWidget from 'react-tradingview-widget';
+import * as TradingViewWidgetModule from 'react-tradingview-widget';
 import { RefreshCw } from 'lucide-react';
+
+const TradingViewWidget = (TradingViewWidgetModule as any).default || TradingViewWidgetModule;
 
 const CryptoChart = memo(() => {
   const [isLoading, setIsLoading] = useState(true);
