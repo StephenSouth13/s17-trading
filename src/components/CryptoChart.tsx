@@ -64,7 +64,7 @@ const CryptoChart = memo(() => {
         <h2 className="text-lg sm:text-xl font-semibold">Bitcoin Price</h2>
       </div>
       <div className="h-[250px] sm:h-[350px] lg:h-[400px] w-full">
-        <TradingViewWidget
+        <Widget
           symbol="BINANCE:BTCUSDT"
           theme="Dark"
           locale="en"
