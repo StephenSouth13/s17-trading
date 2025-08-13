@@ -1,36 +1,20 @@
 import { memo, useState, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
 
-// Dynamic import for TradingView widget to avoid ES module issues
-let TradingViewWidget: any = null;
+// Use require for CommonJS module
+const TradingViewWidget = require('react-tradingview-widget');
 
 const CryptoChart = memo(() => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [widgetLoaded, setWidgetLoaded] = useState(false);
 
   useEffect(() => {
-    // Dynamically import the TradingView widget
-    const loadWidget = async () => {
-      try {
-        const module = await import('react-tradingview-widget');
-        TradingViewWidget = module.default || module;
-        setWidgetLoaded(true);
+    // Set loading false after a short delay để show chart
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
 
-        // Set loading false after widget is loaded
-        const timer = setTimeout(() => {
-          setIsLoading(false);
-        }, 500);
-
-        return () => clearTimeout(timer);
-      } catch (err) {
-        console.error('Failed to load TradingView widget:', err);
-        setError(true);
-        setIsLoading(false);
-      }
-    };
-
-    loadWidget();
+    return () => clearTimeout(timer);
   }, []);
 
   if (isLoading) {
