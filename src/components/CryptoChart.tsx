@@ -1,8 +1,11 @@
 import { memo, useState, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
 
-// Use require for CommonJS module
-const TradingViewWidget = require('react-tradingview-widget');
+// Import with both default and named export handling
+import TradingViewWidget, * as TradingViewModule from 'react-tradingview-widget';
+
+// Ensure we get the correct export
+const Widget = TradingViewWidget || (TradingViewModule as any).default || TradingViewModule;
 
 const CryptoChart = memo(() => {
   const [isLoading, setIsLoading] = useState(true);
